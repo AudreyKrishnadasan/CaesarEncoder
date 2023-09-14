@@ -1,0 +1,46 @@
+import java.util.*;
+   
+public class project1{
+
+   public static String encode(String s, int[] arr){
+  
+    // j = 0 (tracking for which key to use)
+    //for loop for len of String
+      //take char @ String[i], convert to int(its ascii val), add key[j] += int(if new val > 126 --> 32 + (val-126) | new val     < 32 --> 126 - (32 - val)) , convert int back to char, replace String[i] with new char
+      // j++ (if j > keyarr len, j = 0) 
+  
+    //return encoded string
+  
+  }
+
+   public static void main(String args[]){
+       System.out.println("Welcome to Caesar's Encoder!");
+       Scanner scan = new Scanner(System.in);
+   
+     // while true loop to keep encoder running until the user decides to be done
+      while(true){
+           //ask for key(s), use string.split(" ") to turn keys into a keyArray
+          System.out.println("Please enter the individual key values (positive or negative integers, one after another in the     same line with a blank between two values)");
+          String keyVals = scan.next();
+          int[] keyArray = keyVals.split(" ");
+  
+          //ask for String/phrase to be encoded
+          System.out.println("Enter a string to be encoded: ");
+          String s = scan.next();
+  
+          // print encode function
+          System.out.println("The encoded message: ");
+          System.out.println(encode(s, keyArray));
+  
+          //ask if you want to run program again (y -> continue | n -> break)
+          System.out.print("Do you want to run the program again (y for yes and n for no)?: ");
+          char c = scan.next().charAt(0);
+          if(c == 'y'){
+              continue;
+          }
+          break;
+      }
+  }
+  
+  
+}
