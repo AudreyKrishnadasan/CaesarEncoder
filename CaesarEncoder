@@ -2,17 +2,6 @@ import java.util.*;
    
 public class project1{
 
-   public static String encode(String s, int[] arr){
-  
-    // j = 0 (tracking for which key to use)
-    //for loop for len of String
-      //take char @ String[i], convert to int(its ascii val), add key[j] += int(if new val > 126 --> 32 + (val-126) | new val     < 32 --> 126 - (32 - val)) , convert int back to char, replace String[i] with new char
-      // j++ (if j > keyarr len, j = 0) 
-  
-    //return encoded string
-  
-  }
-
    public static void main(String args[]){
        System.out.println("Welcome to Caesar's Encoder!");
        Scanner scan = new Scanner(System.in);
@@ -31,7 +20,11 @@ public class project1{
           // print encode function
           System.out.println("The encoded message: ");
           System.out.println(encode(s, keyArray));
-  
+
+          // print decoded message
+          System.out.println("The decoded message: ");
+          System.out.println(decode(eString, keyArray));
+
           //ask if you want to run program again (y -> continue | n -> break)
           System.out.print("Do you want to run the program again (y for yes and n for no)?: ");
           char c = scan.next().charAt(0);
@@ -40,5 +33,51 @@ public class project1{
           }
           break;
       }
+   }
+
+   public static String decode(String s, String[] arr){
+      int j = 0;
+      int len = arr.length;
+      String eS = "";
+      for(int i = 0; i < s.length(); i++){
+         int c = (int) s.charAt(i);
+         int newC = c - Integer.valueOf(arr[j]);
+         if(newC > 126){
+             newC = (newC - 126)  + 31;
+         }
+         else if(newC < 32){
+             newC = (127 - (32 - newC));
+         }
+         eS += (char)newC;
+         j++;
+         if(j >=len){
+             j = 0;
+         }
+      }
+      return eS;
+   }
   
+  public static String encode(String s, String[] arr){
+          // j = 0 (tracking for which key to use)
+          int j = 0;
+          int len = arr.length;
+          String eS = "";
+          for(int i = 0; i < s.length(); i++){
+              int c = (int) s.charAt(i);
+              int newC = Integer.valueOf(arr[j]) + c;
+              if(newC > 126){
+                  newC = (newC - 126) + 31;
+              }
+              else if(newC < 32){
+                  newC = (127 - (32 - newC));
+              }
+              eS += (char)newC;
+              j++;
+              if(j >= len){
+                  j = 0;
+              }
+          }
+          return eS;
+      }
+
 }
